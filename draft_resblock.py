@@ -53,7 +53,7 @@ dataset_val = Dataset(testlist)
 class ResBlock(nn.Module):
     def __init__(self):
         super().__init__()
-        self.conv7a = nn.Conv3d(in_channels=23, out_channels=23, kernel_size=7, padding=3)
+        self.conv7a = nn.Conv3d(in_channels=23, out_channels=23, kernel_size=7, padding=3, bias=False)
         torch.nn.init.kaiming_normal_(self.conv7a.weight, nonlinearity='relu')
         self.bn1 = nn.BatchNorm3d(23)
         
@@ -77,7 +77,7 @@ class ResBlock(nn.Module):
         out = self.relu(out)
 
         return out
-
+"""
 class Conv7(nn.Module):
     def __init__(self):
         super(Conv7, self).__init__()
@@ -92,16 +92,16 @@ class Conv7(nn.Module):
         #x = self.bn(x)
         x = self.relu(x)
         return x
-
+"""
 class CNN(nn.Module):
 
     def __init__(self):
         super(CNN, self).__init__()
-        self.conv5a = nn.Conv3d(in_channels=1, out_channels=23, kernel_size=5, padding=2)
+        self.conv5a = nn.Conv3d(in_channels=1, out_channels=23, kernel_size=5, padding=2, bias=False)
         torch.nn.init.kaiming_normal_(self.conv5a.weight, nonlinearity='relu')
         self.bn1 = nn.BatchNorm3d(23)
         
-        self.conv5b = nn.Conv3d(in_channels=23, out_channels=23, kernel_size=5, padding=2)
+        self.conv5b = nn.Conv3d(in_channels=23, out_channels=23, kernel_size=5, bias=False)
         torch.nn.init.kaiming_normal_(self.conv5b.weight, nonlinearity='relu')
         self.bn2 = nn.BatchNorm3d(23)
         
@@ -113,11 +113,11 @@ class CNN(nn.Module):
             
         self.upsamp = nn.Upsample(scale_factor=2, mode='nearest')
         
-        self.conv5c = nn.Conv3d(in_channels=23, out_channels=23, kernel_size=5, padding=2)
+        self.conv5c = nn.Conv3d(in_channels=23, out_channels=23, kernel_size=5, bias=False)
         torch.nn.init.kaiming_normal_(self.conv5c.weight, nonlinearity='relu')
         self.bn3 = nn.BatchNorm3d(23)
         
-        self.output = nn.Conv3d(in_channels=23, out_channels=1, kernel_size=5, padding=2)
+        self.output = nn.Conv3d(in_channels=23, out_channels=1, kernel_size=5)
         torch.nn.init.kaiming_normal_(self.output.weight, nonlinearity='relu')
         
         self.relu = nn.ReLU()
