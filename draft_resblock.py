@@ -54,11 +54,11 @@ class ResBlock(nn.Module):
     def __init__(self):
         super().__init__()
         self.conv7a = nn.Conv3d(in_channels=23, out_channels=23, kernel_size=7, padding=3)
-        torch.nn.init.kaiming_normal_(self.conv7a.weight, nonlinearity='leaky_relu')
+        torch.nn.init.kaiming_normal_(self.conv7a.weight, nonlinearity='relu')
         self.bn1 = nn.BatchNorm3d(23)
         
         self.conv7b = nn.Conv3d(in_channels=23, out_channels=23, kernel_size=7, padding=3)
-        torch.nn.init.kaiming_normal_(self.conv7b.weight, nonlinearity='leaky_relu')
+        torch.nn.init.kaiming_normal_(self.conv7b.weight, nonlinearity='relu')
         self.bn2 = nn.BatchNorm3d(23)
         
         self.relu = nn.ReLU()
