@@ -77,22 +77,7 @@ class ResBlock(nn.Module):
         out = self.relu(out)
 
         return out
-"""
-class Conv7(nn.Module):
-    def __init__(self):
-        super(Conv7, self).__init__()
-        self.conv7 = nn.Conv3d(in_channels=23, out_channels=23, kernel_size=7, padding=3)
-        torch.nn.init.kaiming_normal_(self.conv7.weight, nonlinearity='relu')
-        self.bn = nn.BatchNorm3d(20)
-        
-        self.relu = nn.ReLU()
-        
-    def forward(self,x):
-        x = self.conv7(x)
-        #x = self.bn(x)
-        x = self.relu(x)
-        return x
-"""
+
 class CNN(nn.Module):
 
     def __init__(self):
@@ -243,19 +228,7 @@ with torch.no_grad():
         torch.save(yhatc, 'predictions1/' + (str(count)) + '.pt')
         torch.cuda.empty_cache()
         count += 1
-"""
-with open('document.csv','a') as fd:
-    writer = csv.writer(fd)
-    for i in range(40):
-        writer.writerow([str((yhat[0][0][i][x][x]).item()) for x in range(40)])
-              
-with open('document.csv','a') as fd:
-    writer = csv.writer(fd)
-    for i in range(40):
-        for j in range(40):
-            for k in range(10):
-                writer.writerow([str((yhat[0][0][i][j][4*k]).item()), str((yhat[0][0][i][j][4*k + 1]).item()), str((yhat[0][0][i][j][4*k + 2]).item()), str((yhat[0][0][i][j][4*k + 3]).item())])
-"""
+
 hist, bin_edges = np.histogram(losses1)
 print(hist)
 print(bin_edges)

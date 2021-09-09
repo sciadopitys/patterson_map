@@ -49,35 +49,6 @@ class Dataset(torch.utils.data.Dataset):
 dataset_train = Dataset(trainlist)
 dataset_val = Dataset(testlist)
 
-"""
-class ResBlock(nn.Module):
-    def __init__(self):
-        super().__init__()
-        self.conv7a = nn.Conv3d(in_channels=20, out_channels=20, kernel_size=7, padding=3)
-        torch.nn.init.kaiming_normal_(self.conv7a.weight, nonlinearity='leaky_relu')
-        self.bn1 = nn.BatchNorm3d(20)
-        
-        self.conv7b = nn.Conv3d(in_channels=20, out_channels=20, kernel_size=7, padding=3)
-        torch.nn.init.kaiming_normal_(self.conv7b.weight, nonlinearity='leaky_relu')
-        self.bn2 = nn.BatchNorm3d(20)
-        
-        self.leakyrelu = nn.LeakyReLU()
-
-    def forward(self,x):
-        identity = x
-
-        out = self.conv7a(x)
-        #out = self.bn1(out)
-        out = self.leakyrelu(out)
-        
-        out = self.conv7b(out)
-        #out = self.bn2(out)
-
-        out += identity
-        out = self.leakyrelu(out)
-
-        return out
-"""
 class Conv7(nn.Module):
     def __init__(self):
         super(Conv7, self).__init__()
@@ -243,19 +214,7 @@ with torch.no_grad():
         torch.save(yhatc, 'predictions/' + (str(count)) + '.pt')
         torch.cuda.empty_cache()
         count += 1
-"""
-with open('document.csv','a') as fd:
-    writer = csv.writer(fd)
-    for i in range(40):
-        writer.writerow([str((yhat[0][0][i][x][x]).item()) for x in range(40)])
-              
-with open('document.csv','a') as fd:
-    writer = csv.writer(fd)
-    for i in range(40):
-        for j in range(40):
-            for k in range(10):
-                writer.writerow([str((yhat[0][0][i][j][4*k]).item()), str((yhat[0][0][i][j][4*k + 1]).item()), str((yhat[0][0][i][j][4*k + 2]).item()), str((yhat[0][0][i][j][4*k + 3]).item())])
-"""
+
 hist, bin_edges = np.histogram(losses1)
 print(hist)
 print(bin_edges)
