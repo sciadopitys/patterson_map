@@ -86,7 +86,7 @@ class CNN(nn.Module):
         torch.nn.init.kaiming_normal_(self.conv5a.weight, nonlinearity='relu')
         self.bn1 = nn.BatchNorm3d(23)
         
-        self.conv5b = nn.Conv3d(in_channels=23, out_channels=23, kernel_size=5, bias=False)
+        self.conv5b = nn.Conv3d(in_channels=23, out_channels=23, kernel_size=5, padding=2, bias=False)
         torch.nn.init.kaiming_normal_(self.conv5b.weight, nonlinearity='relu')
         self.bn2 = nn.BatchNorm3d(23)
         
@@ -98,11 +98,11 @@ class CNN(nn.Module):
             
         self.upsamp = nn.Upsample(scale_factor=2, mode='nearest')
         
-        self.conv5c = nn.Conv3d(in_channels=23, out_channels=23, kernel_size=5, bias=False)
+        self.conv5c = nn.Conv3d(in_channels=23, out_channels=23, kernel_size=5, padding=2, bias=False)
         torch.nn.init.kaiming_normal_(self.conv5c.weight, nonlinearity='relu')
         self.bn3 = nn.BatchNorm3d(23)
         
-        self.output = nn.Conv3d(in_channels=23, out_channels=1, kernel_size=5)
+        self.output = nn.Conv3d(in_channels=23, out_channels=1, kernel_size=5, padding=2)
         torch.nn.init.kaiming_normal_(self.output.weight, nonlinearity='relu')
         
         self.relu = nn.ReLU()
